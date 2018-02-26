@@ -7,13 +7,14 @@
 5. app.js格式
 ```
 import Vue from 'vue'
+
 new Vue({
-el:'#app', //MVC中view层模板
-data:{
-  message:'Hellow Vue!' // 对应page.html文件中的占位符
-},
-methods:{  // 注意是methods 不是method
-  changeMessage(){} 
-}
+  el:'#app', //MVC中view层模板
+  data:{
+    message:'Hellow Vue!' // 对应page.html文件中的占位符
+  },
+  methods:{  // 注意是methods 不是method
+    changeMessage(){} 
+  }
 })
 ```
