@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue todo</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: STKaiti;
+        }
+
+        body {
+            height: 100vh;
+            background: #DDDDDD;
+        }
+
+        h1 {
+            margin: 20px auto;
+            max-width: 6em;
+            color: #303133;
+        }
+
+        #app {
+            max-width: 800px;
+            margin: 100px auto;
+        }
+
+        .newTask input {
+            width: 100%;
+            line-height: 24px;
+            border-radius: 4px;
+            background: white;
+            font-size: 1em;
+        }
+
+        ol {
+            margin: 20px auto;
+        }
+
+        ol li:nth-child(1) {
+            border-top: 1px solid #333333;
+        }
+
+        ol li {
+            padding: 5px;
+            margin: 5px 0;
+            position: relative;
+            border-bottom: 1px solid #333333;
+        }
+
+        ol li span {
+            display: inline-block;
+        }
+
+        ol li .todoName {
+            width: 170px;
+        }
+
+        ol li .ifDone {
+            width: 6em;
+        }
+
+        ol li input {
+            width: 1em;
+            margin: 0 auto;
+        }
+
+        ol li button {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            font-family: Monaco;
+            width: 2em;
+            height: 2em;
+            border-radius: 50%;
+            outline: none;
+            background: #67c23a;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <section id="signInAndSignUp"
+             v-if="!currentUser">
+        <div>
+            <lable><input type="radio" name="type" value="signUp"
+                          v-model="actionType">注册
+            </lable>
+            <lable><input type="radio" name="type" value="signIn"
+                          v-model="actionType">登录</lable>
+        </div>
+        <div class="signUp"
+             v-if="actionType==='signUp'">
+            <form
+                    @submit.prevent=signUp>
+                <div class="formRow">
+                    用户名<input type="text"
+                              v-model="formData.username">
+                </div>
+                <div class="formRow">
+                    密码<input type="password"
+                             v-model="formData.password">
+                </div>
+                <div class="formActions">
+                    <input type="submit" value="注册">
+                </div>
+            </form>
+        </div>
+        <div class="signIn"
+             v-if="actionType==='signIn'">
+            <form
+                    @submit.prevent=signIn>
+                <div class="formRow">
+                    用户名<input type="text"
+                              v-model="formData.username">
+                </div>
+                <div class="formRow">
+                    密码<input type="password"
+                             v-model="formData.password">
+                </div>
+                <div class="formActions">
+                    <input type="submit" value="登录">
+                </div>
+            </form>
+        </div>
+    </section>
+    <section id="todo"
+             v-if="currentUser">
+        <h1>我的待办事项</h1>
+        <div class="newTask">
+            <input type="text" placeholder="请输入代办事项"
+                   v-model="newTodo"
+                   @keypress.enter="addTodo">
+        </div>
+        <ol class="todo">
+            <li v-for="todo in todoList">
+                <input type="checkbox" v-model="todo.done">
+                <span class="todoName">{{ todo.title }}</span>
+                <span class="ifDone"
+                      v-if="todo.done">已完成</span>
+                <span class="ifDone"
+                      v-else>未完成</span>
+                <span>创建时间　　　　　　{{todo.createdAt}}</span>
+                <button @click="removeTodo(todo)">X</button>
+            </li>
+        </ol>
+    </section>
+</div>
+<script src="bundle.js"></script>
+</body>
+</html>
