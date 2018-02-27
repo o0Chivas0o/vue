@@ -19,15 +19,23 @@ let app = new Vue({
     newTodo: '',
     todoList: [],
     currentUser: null,
+    signUserName:'',
   },
   created: function () {
     window.onbeforeunload = () => {
       let dataString = JSON.stringify(this.todoList)
+      let userString = JSON.stringify(this.signUserName)
       window.localStorage.setItem('myTodos', dataString)
+      window.localStorage.setItem('username',userString)
     }
     let oldDataString = window.localStorage.getItem('myTodos')
+    let oldUserString = window.localStorage.getItem('username')
     let oldData = JSON.parse(oldDataString)
+    let oldUser = JSON.parse(oldUserString)
     this.todoList = oldData || []
+    this.signUserName = oldUser || '';
+    this.currentUser = this.getCurrentUser()
+    // 获取时间
     Date.prototype.Format = function (fmt) {
       let o = {
         'M+': this.getMonth() + 1, //月份
@@ -65,11 +73,12 @@ let app = new Vue({
       user.setUsername(this.formData.username)
       user.setPassword(this.formData.password)
       user.signUp().then(
-        () => {
+        (object) => {
           this.currentUser = this.getCurrentUser()
-          alert('注册成功')
+          //alert('注册成功')
+          return object.attributes.username
         },
-        ()=>{
+        () => {
           alert('注册失败')
         })
     },
@@ -79,13 +88,23 @@ let app = new Vue({
           this.currentUser = this.getCurrentUser()
           alert('登录成功')
         },
-        ()=>{
+        () => {
           alert('登录失败')
         })
     },
-    getCurrentUser() {
-      let {id, createdAt, attributes: {username}} = AV.User.current()
-      return {id, username, createdAt}
+    getCurrentUser () {
+      let current = AV.User.current()
+      if (current) {
+        let {id, createdAt, attributes: {username}} = current
+        return {id, username, createdAt}
+      } else {
+        return null
+      }
+    },
+    signOut () {
+      AV.User.logOut()
+      this.currentUser = null
+      window.location.reload()
     }
   }
 })

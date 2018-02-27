@@ -314,18 +314,26 @@ var app = new _vue2.default({
     },
     newTodo: '',
     todoList: [],
-    currentUser: null
+    currentUser: null,
+    signUserName: ''
   },
   created: function created() {
     var _this = this;
 
     window.onbeforeunload = function () {
       var dataString = JSON.stringify(_this.todoList);
+      var userString = JSON.stringify(_this.signUserName);
       window.localStorage.setItem('myTodos', dataString);
+      window.localStorage.setItem('username', userString);
     };
     var oldDataString = window.localStorage.getItem('myTodos');
+    var oldUserString = window.localStorage.getItem('username');
     var oldData = JSON.parse(oldDataString);
+    var oldUser = JSON.parse(oldUserString);
     this.todoList = oldData || [];
+    this.signUserName = oldUser || '';
+    this.currentUser = this.getCurrentUser();
+    // 获取时间
     Date.prototype.Format = function (fmt) {
       var o = {
         'M+': this.getMonth() + 1, //月份
@@ -362,9 +370,10 @@ var app = new _vue2.default({
       var user = new _leancloudStorage2.default.User();
       user.setUsername(this.formData.username);
       user.setPassword(this.formData.password);
-      user.signUp().then(function () {
+      user.signUp().then(function (object) {
         _this2.currentUser = _this2.getCurrentUser();
-        alert('注册成功');
+        //alert('注册成功')
+        return object.attributes.username;
       }, function () {
         alert('注册失败');
       });
@@ -380,12 +389,21 @@ var app = new _vue2.default({
       });
     },
     getCurrentUser: function getCurrentUser() {
-      var _AV$User$current = _leancloudStorage2.default.User.current(),
-          id = _AV$User$current.id,
-          createdAt = _AV$User$current.createdAt,
-          username = _AV$User$current.attributes.username;
+      var current = _leancloudStorage2.default.User.current();
+      if (current) {
+        var id = current.id,
+            createdAt = current.createdAt,
+            username = current.attributes.username;
 
-      return { id: id, username: username, createdAt: createdAt };
+        return { id: id, username: username, createdAt: createdAt };
+      } else {
+        return null;
+      }
+    },
+    signOut: function signOut() {
+      _leancloudStorage2.default.User.logOut();
+      this.currentUser = null;
+      window.location.reload();
     }
   }
 });

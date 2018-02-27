@@ -92,7 +92,8 @@
                           v-model="actionType">注册
             </lable>
             <lable><input type="radio" name="type" value="signIn"
-                          v-model="actionType">登录</lable>
+                          v-model="actionType">登录
+            </lable>
         </div>
         <div class="signUp"
              v-if="actionType==='signUp'">
@@ -132,6 +133,12 @@
     <section id="todo"
              v-if="currentUser">
         <h1>我的待办事项</h1>
+        <p>
+            欢迎你 {{signUserName}} !
+            <button
+                    @click="signOut">退出登录
+            </button>
+        </p>
         <div class="newTask">
             <input type="text" placeholder="请输入代办事项"
                    v-model="newTodo"
