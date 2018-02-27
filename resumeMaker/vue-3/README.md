@@ -1,6 +1,6 @@
-#### vue mission-2 待办事项应用
+#### vue mission-3 为待办事项应用添加注册、登录、退出登录功能
 
-1. 用到了`@click`,`v-for`,`v-model`,`@keypress.xxx`,`v-if`,`v-else`,等api.
-2. 网上博客抄的js获取正确事件格式.
-3. `window.onbeforeunload`api以及`window.localstorage的应用`。
-4. 可以实现添加,删除,点击完成,未完成等操作。
+1. 引用了一个`leancloud`服务器
+2. 通过服务器api设置了`signUp`,`signIn`,`signOut`方法
+3. 尝试将`creat()`钩子函数和中的LocalStorage封装为函数,代码太少觉得没必要,但是成功封装。
+4. 用到了一个检测用户是否登录的函数。
