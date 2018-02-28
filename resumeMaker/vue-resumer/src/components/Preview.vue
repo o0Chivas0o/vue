@@ -1,7 +1,7 @@
 <template>
-<div>
-  Preview
-</div>
+  <div>
+    Preview
+  </div>
 </template>
 
 <script>
@@ -11,8 +11,7 @@
 </script>
 
 <style scoped>
-div{
-  border: 1px solid;
-  background: yellow;
-}
+  div {
+    border: 1px solid;
+  }
 </style>

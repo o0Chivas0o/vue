@@ -27,16 +27,19 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    background: #DDDDDD;
   }
+
   main {
     display: flex;
     flex: 1;
-    .editor {
-      width: 40em;
-    }
-    .preview {
-      flex: 1;
-    }
+
+  .editor {
+    width: 40em;
+  }
+
+  .preview {
+    flex: 1;
+  }
+
   }
 </style>

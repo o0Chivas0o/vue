@@ -1,7 +1,13 @@
 <template>
-<div>
-  topBar
-</div>
+  <div id="topBar">
+    <div class="logo">
+    VueRusumer
+    </div>
+    <div class="actions">
+      <button>注册</button>
+      <button>登录</button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -10,10 +16,10 @@
   }
 </script>
 
-<style scoped>
-div{
-  border:1px solid;
-  background: green;
-  height: 100px;
-}
+<style lang="scss">
+  #topBar{
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+  }
 </style>
