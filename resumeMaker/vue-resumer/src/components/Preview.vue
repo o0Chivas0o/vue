@@ -1,0 +1,18 @@
+<template>
+<div>
+  Preview
+</div>
+</template>
+
+<script>
+  export default {
+    name: ''
+  }
+</script>
+
+<style scoped>
+div{
+  border: 1px solid;
+  background: yellow;
+}
+</style>
