@@ -97,50 +97,53 @@
             height: 2em;
             font-size: 16px;
             border-radius: 15px;
+            background: white;
         }
 
-        ol {
+        #todo .todo  {
             margin: 20px auto;
         }
 
-        ol li:nth-child(1) {
+        #todo .todo > li:nth-child(1) {
             border-top: 1px solid #333333;
         }
 
-        ol li {
+        #todo .todo > li {
             padding: 10px;
             margin: 5px 0;
             position: relative;
             border-bottom: 1px solid #333333;
         }
 
-        ol li span {
+        #todo .todo > li span {
             display: inline-block;
         }
 
-        ol li .todoName {
+        #todo .todo > li .todoName {
             width: 500px;
         }
 
-        ol li .ifDone {
+        #todo .todo > li .ifDone {
             width: 18em;
         }
 
-        ol li input {
+        #todo .todo > li > input {
             width: 6em;
             margin: 0 auto;
         }
 
-        ol li button {
+        #todo .todo > li > .button {
+            background: white;
             position: absolute;
-            bottom: 50%;
+            top: 50%;
+            transform: translateY(-50%);
             right: 0;
             font-family: Monaco;
-            width: 2em;
-            height: 2em;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             outline: none;
-            background: #67c23a;
+
         }
     </style>
 </head>
@@ -216,7 +219,7 @@
                 <span class="ifDone"
                       v-else>未完成</span>
                 <span>创建时间　　　　　　{{todo.createdAt}}</span>
-                <button @click="removeTodo(todo)">X</button>
+                <button class="button" @click="removeTodo(todo)">X</button>
             </li>
         </ol>
     </section>
