@@ -15,6 +15,8 @@
         }
 
         body {
+            height: 100vh;
+            overflow: hidden;
             background: #DDDDDD;
         }
 
@@ -22,21 +24,51 @@
         }
 
         #signInAndSignUp {
-            border: 1px solid;
+            height: 100vh;
+            overflow: hidden;
+            background: url("bg.jpg") no-repeat;
+            background-size:cover;
             display: flex;
-            justify-content: center;
             align-items: center;
         }
-        #signInAndSignUp .form{
-            width: 480px;
-        }
 
+        #signInAndSignUp .form {
+            margin-left: 50px;
+            width: 320px;
+            height: 320px;
+            border-radius: 20px;
+            background: white;
+        }
+        #signInAndSignUp .form::before {
+            display: table;
+            content: ''
+        }
+        #signInAndSignUp .form::after{
+            display: table;
+            content:''
+        }
         #signInAndSignUp .inOrOut {
-            border: 1px solid;
-            width: 100%;
+            width:  320px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        #signInAndSignUp .signUp form,.signIn form{
+            height: 200px;
             text-align: center;
         }
 
+        #signInAndSignUp .formRow{
+            padding: 15px;
+            text-align: center;}
+        #signInAndSignUp .formActions input{
+            width: 100px;
+            border-radius: 8px;
+            height: 18px;
+            font-size:14px;
+        }
+        #todo{
+            background: #DDDDDD;
+        }
         .newTask input {
             width: 100%;
             line-height: 24px;
@@ -76,7 +108,7 @@
         }
 
         ol li {
-            padding: 5px;
+            padding: 10px;
             margin: 5px 0;
             position: relative;
             border-bottom: 1px solid #333333;
@@ -87,21 +119,21 @@
         }
 
         ol li .todoName {
-            width: 170px;
+            width: 500px;
         }
 
         ol li .ifDone {
-            width: 6em;
+            width: 18em;
         }
 
         ol li input {
-            width: 1em;
+            width: 6em;
             margin: 0 auto;
         }
 
         ol li button {
             position: absolute;
-            bottom: 0;
+            bottom: 50%;
             right: 0;
             font-family: Monaco;
             width: 2em;
@@ -130,11 +162,11 @@
                 <form
                         @submit.prevent=signUp>
                     <div class="formRow">
-                        用户名<input type="text"
+                        账　户<input type="text"
                                   v-model="formData.username">
                     </div>
                     <div class="formRow">
-                        密码<input type="password"
+                        密　码<input type="password"
                                  v-model="formData.password">
                     </div>
                     <div class="formActions">
@@ -147,11 +179,11 @@
                 <form
                         @submit.prevent=signIn>
                     <div class="formRow">
-                        用户名<input type="text"
+                        账　户<input type="text"
                                   v-model="formData.username">
                     </div>
                     <div class="formRow">
-                        密码<input type="password"
+                        密　码<input type="password"
                                  v-model="formData.password">
                     </div>
                     <div class="formActions">
@@ -160,13 +192,12 @@
                 </form>
             </div>
         </div>
-        <img src="bg.jpg" alt="" width="960" height="540">
     </section>
     <section id="todo"
              v-if="currentUser">
         <h1>我的待办事项</h1>
         <p>
-            欢迎你，{{formData.username}}！
+            欢迎你，{{currentUser.username}}！
         </p>
         <button
                 @click="signOut">退出登录
