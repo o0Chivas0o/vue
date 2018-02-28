@@ -43,7 +43,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/resumeMaker/vue-resumer/dist/',
+    assetsPublicPath: 'vue/resumeMaker/vue-resumer/dist/',
 
     /**
      * Source Maps
