@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="preview">
     Preview
   </div>
 </template>
@@ -10,8 +10,7 @@
   }
 </script>
 
-<style scoped>
-  div {
-    border: 1px solid;
+<style type="text/stylus" rel="stylusheet/stylus" lang="scss">
+  #preview {
   }
 </style>

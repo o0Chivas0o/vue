@@ -1,11 +1,11 @@
 <template>
   <div id="topBar">
     <div class="logo">
-    VueRusumer
+      VueRusumer
     </div>
     <div class="actions">
-      <button>注册</button>
-      <button>登录</button>
+      <el-button type="primary" round>注册</el-button>
+      <el-button round>登录</el-button>
     </div>
   </div>
 </template>
@@ -16,10 +16,12 @@
   }
 </script>
 
-<style lang="scss">
-  #topBar{
+<style type="text/stylus" rel="stylusheet/stylus" lang="scss">
+  #topBar {
     display: flex;
     justify-content: space-between;
     padding: 16px;
+    font-size: 20px;
+    align-items: center;
   }
 </style>
