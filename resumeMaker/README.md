@@ -10,7 +10,8 @@ vue建立编辑器:https://o0chivas0o.github.io/vue/resumeMaker/vue-resumer/dist
 ### 项目详解请点击进各个步骤文件夹,有附上说明  
 
 1-4为一个vue的todoList应用  
-  
+    
+
 简历编辑器在提交到github预览页面会出现路径错误问题,需要修改`config`文件夹里`index.js`具体修改内容如下
 ```
 ...
