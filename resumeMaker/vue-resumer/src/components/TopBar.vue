@@ -6,13 +6,18 @@
     <div class="actions">
       <el-button type="primary" round>注册</el-button>
       <el-button round>登录</el-button>
+      <el-button v-on:click="preview" type="primary">预览</el-button>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: ''
+    methods:{
+      preview(){
+        this.$emit('preview')
+      }
+    }
   }
 </script>
 

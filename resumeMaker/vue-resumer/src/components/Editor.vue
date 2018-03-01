@@ -14,33 +14,34 @@
     <ol class="panes">
       <li v-bind:class="{active:currentTab === 0}">
         <h2>个人档案</h2>
-        <EditorProfile v-bind:profile="profile" />
+        <EditorProfile v-bind:profile="resume.profile" />
       </li>
       <li v-bind:class="{active:currentTab === 1}">
         <h2>工作经历</h2>
         <EditorItems
-          v-bind:items="experience"
+          v-bind:items="resume.experience"
+          v-bind:a="{company:'',content:''}"
           v-bind:labels="{company:'就职公司',content:'工作内容'}"
         />
       </li>
       <li v-bind:class="{active:currentTab === 2}">
         <h2>项目经历</h2>
         <EditorItems
-          v-bind:items="projects"
+          v-bind:items="resume.projects"
           v-bind:labels="{name:'项目名称',content:'项目描述',duty:'个人职责'}"
         />
       </li>
       <li v-bind:class="{active:currentTab === 3}">
         <h2>教育经历</h2>
         <EditorItems
-          v-bind:items="education"
+          v-bind:items="resume.education"
           v-bind:labels="{school:'就读院校',duration:'就读时间',degree:'学位信息'}"
         />
       </li>
       <li v-bind:class="{active:currentTab === 4}">
         <h2>获奖情况</h2>
         <EditorItems
-          v-bind:items="trophy"
+          v-bind:items="resume.trophy"
           v-bind:labels="{name:'获奖名称',content:'获奖信息',time:'获奖时间'}"
         />
       </li>
@@ -48,13 +49,13 @@
         <h2>联系方式</h2>
         <el-form>
           <el-form-item label="手机号码">
-            <el-input v-model="contact.phoneNumber"></el-input>
+            <el-input v-model="resume.contact.phoneNumber"></el-input>
           </el-form-item>
           <el-form-item label="个人邮箱">
-            <el-input v-model="contact.email"></el-input>
+            <el-input v-model="resume.contact.email"></el-input>
           </el-form-item>
           <el-form-item label="联系人QQ">
-            <el-input v-model="contact.qq"></el-input>
+            <el-input v-model="resume.contact.qq"></el-input>
           </el-form-item>
         </el-form>
       </li>
@@ -71,33 +72,11 @@
       EditorProfile,
       EditorItems,
     },
+    props:['resume'],
     data () {
       return {
         currentTab: 0,
         icons: ['shenfen', 'work0', 'heart', 'education', 'iconjiangbei', 'phone'],
-        profile: {
-          name: '',
-          gender: '',
-          birth: '',
-          city: ''
-        },
-        experience: [
-          {company: '', content: ''}
-        ],
-        education: [
-          {school: '', duration: '', degree: ''}
-        ],
-        projects:[
-          {name:'',content:'',duty:''}
-        ],
-        trophy:[
-          {name:'',content:'',time:''}
-        ],
-        contact:{
-          phoneNumber:'',
-          email:'',
-          qq:''
-        }
       }
     },
     created () {},

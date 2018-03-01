@@ -1,10 +1,14 @@
 <template>
-  <div id="app">
-    <TopBar class="topBar"/>
+  <div id="app" v-bind:class="{previewMode: previewMode}">
+    <TopBar class="topBar"
+            v-on:preview="preview" />
     <main>
-      <Editor class="editor"/>
-      <Preview class="preview"/>
+      <Editor class="editor"
+               v-bind:resume="resume" />
+      <Preview class="preview"
+               v-bind:resume="resume" />
     </main>
+    <el-button id="exitPreview" v-on:click="exitPreview">退出预览</el-button>
   </div>
 </template>
 
@@ -18,12 +22,36 @@
       TopBar,
       Editor,
       Preview
+    },
+    methods:{
+      exitPreview(){
+        this.previewMode = false
+      },
+      preview(){
+        this.previewMode = true
+      }
+    },
+    data () {
+      return {
+        previewMode: false,
+        resume: {
+          profile: {name: '', gender: '', birth: '', city: ''},
+          experience: [{company: '', content: ''}],
+          education: [{school: '', duration: '', degree: ''}],
+          projects: [{name: '', content: '', duty: ''}],
+          trophy: [{name: '', content: '', time: ''}],
+          contact: {phoneNumber: '', email: '', qq: ''}
+        }
+      }
     }
   }
 </script>
 
 <style type="text/scss" rel="stylusheet/scss" lang="scss">
   #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -62,6 +90,25 @@
       border-radius: 4px;
       overflow: hidden;
     }
+  }
+  .previewMode > #topBar{
+    display: none;
+  }
+  .previewMode #editor{
+    display: none;
+  }
+  .previewMode #preview{
+    max-width: 800px;
+    margin: 32px auto;
+  }
+  #exitPreview{
+    display: none;
+  }
+  .previewMode #exitPreview{
+    display: inline-block;
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
   }
 
 </style>

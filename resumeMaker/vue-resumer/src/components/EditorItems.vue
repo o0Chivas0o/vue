@@ -1,26 +1,18 @@
 <template>
-    <el-form>
-      <div class="container"
-           v-for="(item,index) in items"
-           v-bind:key="index">
-        <el-form-item v-for="key in keys"
-                      v-bind:label="labels[key] || key"
-                      v-bind:key="key">
-          <el-input v-model="item[key]"></el-input>
-        </el-form-item>
-        <i class="el-icon-remove"
-           @click="removeItem(index)"></i>
-        <hr>
-      </div>
-      <i class="el-icon-circle-plus"
-         @click="addItem()"></i>
-    </el-form>
+  <el-form>
+    <div class="container" v-for="(item, index) in items" v-bind:key="index">
+      <el-form-item v-for="key in keys" v-bind:label="labels[key] || key" v-bind:key="key">
+        <el-input v-model="item[key]"></el-input>
+      </el-form-item>
+      <i class="el-icon-remove" v-on:click="removeItem(index)"></i>
+      <hr>
+    </div>
+    <i class="el-icon-circle-plus" v-on:click="addItem">添加一项</i>
+  </el-form>
 </template>
-
 <script>
   export default {
-    props:
-      ['items','labels'],
+    props: ['items', 'labels'],
     computed: {
       keys () {
         return Object.keys(this.items[0])
@@ -28,7 +20,7 @@
     },
     methods: {
       addItem () {
-        const empty = {}
+        let empty = {}
         this.keys.map((key) => {
           empty[key] = ''
         })
@@ -40,6 +32,7 @@
     }
   }
 </script>
+
 
 <style rel="stylesheet/scss" type="text/scss" lang="scss">
   .container {
