@@ -16,7 +16,7 @@
   }
 </script>
 
-<style type="text/stylus" rel="stylusheet/stylus" lang="scss">
+<style type="text/scss" rel="stylusheet/scss" lang="scss">
   #topBar {
     display: flex;
     justify-content: space-between;

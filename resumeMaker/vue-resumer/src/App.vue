@@ -22,18 +22,21 @@
   }
 </script>
 
-<style type="text/stylus" rel="stylusheet/stylus" lang="scss">
+<style type="text/scss" rel="stylusheet/scss" lang="scss">
   #app {
     height: 100vh;
     display: flex;
     flex-direction: column;
   }
+
   .icon {
-    width: 1em; height: 1em;
+    width: 1em;
+    height: 1em;
     vertical-align: -0.15em;
     fill: currentColor;
     overflow: hidden;
   }
+
   .topBar {
     z-index: 1;
     box-shadow: 0 0 3px hsla(0, 0, 0, 0.5);

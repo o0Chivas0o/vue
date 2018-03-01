@@ -13,22 +13,50 @@
     </nav>
     <ol class="panes">
       <li v-bind:class="{active:currentTab === 0}">
+        <h2>个人档案</h2>
         <EditorProfile v-bind:profile="profile" />
       </li>
       <li v-bind:class="{active:currentTab === 1}">
-        <EditorExperience v-bind:experience="experience"/>
+        <h2>工作经历</h2>
+        <EditorItems
+          v-bind:items="experience"
+          v-bind:labels="{company:'就职公司',content:'工作内容'}"
+        />
       </li>
       <li v-bind:class="{active:currentTab === 2}">
         <h2>项目经历</h2>
+        <EditorItems
+          v-bind:items="projects"
+          v-bind:labels="{name:'项目名称',content:'项目描述',duty:'个人职责'}"
+        />
       </li>
       <li v-bind:class="{active:currentTab === 3}">
-        <h2>学习经历</h2>
+        <h2>教育经历</h2>
+        <EditorItems
+          v-bind:items="education"
+          v-bind:labels="{school:'就读院校',duration:'就读时间',degree:'学位信息'}"
+        />
       </li>
       <li v-bind:class="{active:currentTab === 4}">
         <h2>获奖情况</h2>
+        <EditorItems
+          v-bind:items="trophy"
+          v-bind:labels="{name:'获奖名称',content:'获奖信息',time:'获奖时间'}"
+        />
       </li>
       <li v-bind:class="{active:currentTab === 5}">
         <h2>联系方式</h2>
+        <el-form>
+          <el-form-item label="手机号码">
+            <el-input v-model="contact.phoneNumber"></el-input>
+          </el-form-item>
+          <el-form-item label="个人邮箱">
+            <el-input v-model="contact.email"></el-input>
+          </el-form-item>
+          <el-form-item label="联系人QQ">
+            <el-input v-model="contact.qq"></el-input>
+          </el-form-item>
+        </el-form>
       </li>
     </ol>
   </div>
@@ -36,12 +64,12 @@
 
 <script>
   import EditorProfile from './EditorProfile'
-  import EditorExperience from './EditorExperience'
+  import EditorItems from './EditorItems'
 
   export default {
-    components:{
+    components: {
       EditorProfile,
-      EditorExperience
+      EditorItems,
     },
     data () {
       return {
@@ -55,16 +83,29 @@
         },
         experience: [
           {company: '', content: ''}
-        ]
+        ],
+        education: [
+          {school: '', duration: '', degree: ''}
+        ],
+        projects:[
+          {name:'',content:'',duty:''}
+        ],
+        trophy:[
+          {name:'',content:'',time:''}
+        ],
+        contact:{
+          phoneNumber:'',
+          email:'',
+          qq:''
+        }
       }
     },
-    created(){},
-    methods: {
-    }
+    created () {},
+    methods: {}
   }
 </script>
 
-<style type="text/stylus" lang="scss">
+<style type="text/scss" rel="stylusheet/scss" lang="scss">
   #editor {
     display: flex;
     > nav {
@@ -92,22 +133,8 @@
     .panes {
       width: 100%;
       overflow: auto;
-      .container{
-        position: relative;
-        .el-icon-remove{
-          position: absolute;
-          right:0;
-          top:0;
-        }
-        .el-icon-circle-plus{
-          position: absolute;
-          top: 0;
-          right:0;
-        }
-      }
       > li {
         display: none;
-        width: 50%;
         margin: 0 auto;
         padding: 32px;
         > h2 {
